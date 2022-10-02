@@ -1,0 +1,14 @@
+[
+  {
+    "url": "wss://d2t.info/ws/tokens/top-movers?num_results=7"
+  },
+  {
+    "url": "http://d2t.info/tokens/price-feed"
+  },
+  {
+    "url": "https://d2t.info/tokens/bitcoin/prices?time_range=week"
+  },
+  {
+    "url": "https://d2t.info/tokens/bitcoin/volumes/heatmap"
+  }
+]
