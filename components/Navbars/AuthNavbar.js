@@ -18,7 +18,7 @@ function AdminNavbar() {
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
-          <Link href="/admin/api-dashboard">
+          <Link href="/admin/admins">
             <span>
               <NavbarBrand href="#pablo">
                 <img
@@ -35,7 +35,7 @@ function AdminNavbar() {
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link href="/admin/api-dashboard">
+                  <Link href="/admin/admins">
                     <img
                       alt="..."
                       src={require("assets/img/brand/nextjs_argon_black.png")}
@@ -52,7 +52,7 @@ function AdminNavbar() {
             </div>
             <Nav className="ml-auto" navbar>
               {/* <NavItem>
-                <Link href="/admin/api-dashboard">
+                <Link href="/admin/admins">
                   <NavLink href="#pablo" className="nav-link-icon">
                     <i className="ni ni-planet" />
                     <span className="nav-link-inner--text">Dashboard</span>

@@ -28,8 +28,7 @@ export default NextAuth({
             role: true,
           },
         });
-        console.log('ok===', maybeUser);
-
+        
         if (!maybeUser) {
           throw new Error("Unauthorized.");
         }

@@ -38,6 +38,7 @@ function Login() {
       localStorage.setItem('user', email);
       router.replace('/admin/admins');
     } else {
+      console.log('signIn error');
       NotificationManager.error('Incorrect email or password', 'Error!', 3000);
     }
   }
