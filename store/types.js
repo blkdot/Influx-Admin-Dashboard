@@ -1,5 +1,5 @@
 export const MODAL_OPEN = "MODAL_OPEN";
-export const TOKEN_MODAL_OPEN = "TOKEN_MODAL_OPEN";
+export const INFLUX_MODAL_OPEN = "INFLUX_MODAL_OPEN";
 
 export const ADMIN_SELECTED = "ADMIN_SELECTED";
 

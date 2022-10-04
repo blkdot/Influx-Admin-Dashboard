@@ -29,20 +29,27 @@ const CSVUpload = (props) => {
 
   const [file, setFile] = useState(null);
   const handleChange = async (file) => {
-    try {
-      var formData = new FormData();
-      formData.append("file", file);
-      console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/upload`);
-      await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/upload`, {
-        method: 'POST',
-        body: formData
-      });
-      setFile(file);
-      NotificationManager.success('File successfully uploaded', 'Success!', 3000);
-    } catch(err) {
-      console.log(err);
-    }
+    console.log(file);
+    setFile(file);
   };
+
+  const uploadFile = async () => {
+    if (file) {
+      try {
+        var formData = new FormData();
+        formData.append("file", file);
+        console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/upload`);
+        await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        setFile(file);
+        NotificationManager.success('File successfully uploaded', 'Success!', 3000);
+      } catch(err) {
+        console.log(err);
+      }
+    }
+  }
 
   return (
     <>
@@ -60,8 +67,13 @@ const CSVUpload = (props) => {
             
           </Col>
           <div className="w-100 d-flex justify-content-center">
-              <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p>
-            </div>
+            <p>{file ? `File name: ${file.name}` : "no files uploaded yet"}</p>
+          </div>
+          <div className="w-100 d-flex justify-content-center">
+            <Button outline color="primary" size="sm" type="button" onClick={() => uploadFile()}>
+              Upload
+            </Button>
+          </div>
         </Row>
       </Container>
       <NotificationContainer/>

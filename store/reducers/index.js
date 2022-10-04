@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import adminReducer from "./admin";
-import tokenReducer from "./token";
+import influxReducer from "./influencer";
 
 const rootReducer = combineReducers({
 	admin: adminReducer,
-	token: tokenReducer
+	influx: influxReducer
 });
 
 export default rootReducer;

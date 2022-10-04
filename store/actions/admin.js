@@ -7,10 +7,10 @@ export const setModalOpen = (isModalOpen) => {
 	};
 };
 
-export const setTokenModalOpen = (isTokenModalOpen) => {
+export const setInfluxModalOpen = (isInfluxModalOpen) => {
 	return {
-		type: t.TOKEN_MODAL_OPEN,
-		payload: isTokenModalOpen,
+		type: t.INFLUX_MODAL_OPEN,
+		payload: isInfluxModalOpen,
 	};
 };
 

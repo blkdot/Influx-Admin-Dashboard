@@ -68,14 +68,21 @@ const InfluencerCampaigns = (props) => {
       <Container className="mt--7 mb-7" fluid>
         <Row className="mt-9">
           <Col className="mb-5 mb-xl-0" xl="4">
-            <Select
-              defaultValue={selectedOption}
-              onChange={setSelectedOption}
-              options={options}
-            />
+            <FormGroup>
+              <label
+                className="form-control-label"
+              >
+                id list:
+              </label>
+              <Select
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                options={options}
+              />
+            </FormGroup>
           </Col>
         </Row>
-        <Row className="mt-9">
+        <Row className="mt-3">
           <Col className="mb-5 mb-xl-0" xl="4">
             <FormGroup>
               <label
@@ -88,6 +95,7 @@ const InfluencerCampaigns = (props) => {
                 id="input-id"
                 value = {campaign && campaign.id}
                 type="text"
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -104,6 +112,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign ? campaign.campaignId : ''}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -120,6 +129,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign ? campaign.campaignId : ''}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -136,6 +146,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.influencerId}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -152,6 +163,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.status}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -168,6 +180,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.campaign.name}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -184,6 +197,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.campaign.avgER}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -200,6 +214,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.campaign.template}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -216,6 +231,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.campaign.negoBudget}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -232,6 +248,7 @@ const InfluencerCampaigns = (props) => {
                 value = {campaign && campaign.campaign.creator}
                 type="text"
                 onChange={(e) => e.preventDefault()}
+                readOnly
               />
             </FormGroup>
           </Col>

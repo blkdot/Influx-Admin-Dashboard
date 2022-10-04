@@ -56,6 +56,7 @@ const InfluencerAccount = (props) => {
                 id="input-id"
                 value = {account && account.id}
                 type="text"
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -71,6 +72,7 @@ const InfluencerAccount = (props) => {
                 id="input-name"
                 value = {account && account.name}
                 type="text"
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -86,6 +88,7 @@ const InfluencerAccount = (props) => {
                 id="input-email"
                 value = {account && account.email}
                 type="text"
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -101,6 +104,7 @@ const InfluencerAccount = (props) => {
                 id="input-logo"
                 value = {account && account.logo}
                 type="text"
+                readOnly
               />
             </FormGroup>
           </Col>
@@ -150,6 +154,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.telegram.username}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -162,18 +167,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.telegram.channelMembers}
                     type="text"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                  >
-                    accountId:
-                  </label>
-                  <Input
-                    className="form-control-alternative"
-                    value = {account && account.telegram.accountId}
-                    type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -186,6 +180,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.telegram.socialUrl}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -198,6 +193,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.telegram.averageInteractions}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
               </CardBody>
@@ -217,6 +213,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.youtube.username}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -229,18 +226,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.youtube.subscribers}
                     type="text"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                  >
-                    accountId:
-                  </label>
-                  <Input
-                    className="form-control-alternative"
-                    value = {account && account.youtube.accountId}
-                    type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -253,6 +239,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.youtube.socialUrl}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -265,6 +252,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.youtube.averageViews}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
               </CardBody>
@@ -284,6 +272,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.tiktok.username}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -296,18 +285,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.tiktok.followers}
                     type="text"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                  >
-                    accountId:
-                  </label>
-                  <Input
-                    className="form-control-alternative"
-                    value = {account && account.tiktok.accountId}
-                    type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -320,6 +298,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.tiktok.socialUrl}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -332,6 +311,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.tiktok.averageLikes}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
               </CardBody>
@@ -353,6 +333,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.twitter.username}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -365,18 +346,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.twitter.followers}
                     type="text"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                  >
-                    accountId:
-                  </label>
-                  <Input
-                    className="form-control-alternative"
-                    value = {account && account.twitter.accountId}
-                    type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -389,6 +359,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.twitter.socialUrl}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -401,6 +372,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.twitter.averageImpressions}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
               </CardBody>
@@ -420,6 +392,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.instagram.username}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -432,18 +405,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.instagram.followers}
                     type="text"
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <label
-                    className="form-control-label"
-                  >
-                    accountId:
-                  </label>
-                  <Input
-                    className="form-control-alternative"
-                    value = {account && account.instagram.accountId}
-                    type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -456,6 +418,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.instagram.socialUrl}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
                 <FormGroup>
@@ -468,6 +431,7 @@ const InfluencerAccount = (props) => {
                     className="form-control-alternative"
                     value = {account && account.instagram.averageInteractions}
                     type="text"
+                    readOnly
                   />
                 </FormGroup>
               </CardBody>

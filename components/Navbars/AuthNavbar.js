@@ -21,10 +21,10 @@ function AdminNavbar() {
           <Link href="/admin/admins">
             <span>
               <NavbarBrand href="#pablo">
-                <img
+                {/* <img
                   alt="..."
                   src={require("assets/img/brand/logo.png")}
-                />
+                /> */}
               </NavbarBrand>
             </span>
           </Link>

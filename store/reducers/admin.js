@@ -5,7 +5,6 @@ const initialState = {
 	adminList: [],
 	selectedAdmin: undefined,
 	isModalOpen: false,
-	isTokenModalOpen: false
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -16,11 +15,6 @@ const mainReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isModalOpen: action.payload,
-			};
-		case t.TOKEN_MODAL_OPEN:
-			return {
-				...state,
-				isTokenModalOpen: action.payload,
 			};
 		case t.ADMIN_FETCH_SUCCEEDED:
 			return {

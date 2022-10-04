@@ -2,15 +2,15 @@ import { HYDRATE } from "next-redux-wrapper";
 import * as t from "../types";
 
 const initialState = {
-	isTokenModalOpen: false
+	isInfluxModalOpen: false
 };
 
 const mainReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case t.TOKEN_MODAL_OPEN:
+		case t.INFLUX_MODAL_OPEN:
 			return {
 				...state,
-				isTokenModalOpen: action.payload,
+				isInfluxModalOpen: action.payload,
 			};
 		default:
 			return state;

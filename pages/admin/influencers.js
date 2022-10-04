@@ -21,13 +21,18 @@ import PageChange from "components/PageChange/PageChange.js"
 import { useInfluencers } from '../../lib/influencers';
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { setInfluxModalOpen } from "../../store";
+import InfluxModal from "../../components/Influx/InfluxModal";
 
 const InfluencerDashboard = (props) => {
+
+  const dispatch = useDispatch();
 
   const router = useRouter();
   const { data } = useInfluencers();
   // console.log('data===', data.influencers);
   const [influencers, setInfluencers] = useState([]);
+  const [influencer, setInfluencer] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
 
@@ -55,6 +60,11 @@ const InfluencerDashboard = (props) => {
   //   e.preventDefault();
   //   dispatch(setModalOpen(true));
   // }
+
+  const updateInflux = (item) => {
+    setInfluencer(item);
+    dispatch(setInfluxModalOpen(true));
+  }
 
   // const showDeleteConfirmationModal = (id, i) => {
   //   setAdminId(id);
@@ -118,6 +128,7 @@ const InfluencerDashboard = (props) => {
                     <th scope="col">account</th>
                     <th scope="col">campaigns</th>
                     <th scope="col">priceRange</th>
+                    <th scope="col">action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,6 +154,11 @@ const InfluencerDashboard = (props) => {
                         </Button>
                       </td>
                       <td> {item.priceRange.length > 1 ? `[${item.priceRange[0]}, ${item.priceRange[1]}]` : ''} </td>
+                      <td> 
+                        <Button outline color="primary" size="sm" type="button" onClick={() => updateInflux(item)}>
+                          Edit
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -192,6 +208,7 @@ const InfluencerDashboard = (props) => {
           </Col>
         </Row>
       </Container>
+      <InfluxModal influx={influencer} />
     </>
   );
   // }
