@@ -16,6 +16,12 @@ var routes = [
     name: "Influencers",
     icon: "ni ni-tv-2 text-primary",
     layout: "/admin",
+  },
+  {
+    path: "/api-status",
+    name: "API Status",
+    icon: "ni ni-tv-2 text-primary",
+    layout: "/admin",
   }
 ];
 export default routes;

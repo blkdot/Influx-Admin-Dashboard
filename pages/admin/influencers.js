@@ -30,14 +30,16 @@ const InfluencerDashboard = (props) => {
 
   const router = useRouter();
   const { data } = useInfluencers();
-  // console.log('data===', data.influencers);
+  // console.log('data===', data.influencers
+  const [modalType, setModalType] = useState('add');
   const [influencers, setInfluencers] = useState([]);
   const [influencer, setInfluencer] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
 
   useEffect(() => {
-    if (data) {
+    if (data && data.influencers) {
+      console.log('data.influencers===', data.influencers);
       setInfluencers(data.influencers);
     }
   }, [data])
@@ -56,13 +58,15 @@ const InfluencerDashboard = (props) => {
     }
   }
 
-  // const addNewAdmin = (e) => {
-  //   e.preventDefault();
-  //   dispatch(setModalOpen(true));
-  // }
+  const addNewInfux = (e) => {
+    e.preventDefault();
+    setModalType('add');
+    dispatch(setInfluxModalOpen(true));
+  }
 
   const updateInflux = (item) => {
     setInfluencer(item);
+    setModalType('edit');
     dispatch(setInfluxModalOpen(true));
   }
 
@@ -102,48 +106,59 @@ const InfluencerDashboard = (props) => {
                     <h3 className="mb-0">Influencers</h3>
                   </div>
                   <div className="col text-right">
-                    {/* <Button
+                    <Button
                       color="primary"
                       href=""
-                      onClick={(e) => addNewAdmin(e)}
+                      onClick={(e) => addNewInfux(e)}
                       size="sm"
                     >
                       Add new
-                    </Button> */}
+                    </Button>
                   </div>
                 </Row>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">accountId</th>
+                    <th scope="col">name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">logo link</th>
+                    <th scope="col">region</th>
+                    <th scope="col">language</th>
                     <th scope="col">isVIP</th>
                     <th scope="col">engagementRate</th>
-                    <th scope="col">loginChannel</th>
-                    <th scope="col">mainChannel</th>
-                    <th scope="col">promotionType</th>
-                    <th scope="col">niche</th>
                     <th scope="col">contactLink</th>
-                    <th scope="col">account</th>
-                    <th scope="col">campaigns</th>
-                    <th scope="col">priceRange</th>
+                    <th scope="col">niche</th>
+                    <th scope="col">promotionType</th>
+                    <th scope="col">Telegram Channel</th>
+                    <th scope="col">Telegram URL</th>
+                    <th scope="col">Twitter Username</th>
+                    <th scope="col">Tiktok Username</th>
+                    <th scope="col">Instagram Username</th>
+                    <th scope="col">Youtube Username</th>
                     <th scope="col">action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {influencers.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((item, i) => (
                     <tr key={i}>
-                      <th scope="row">{item.id}</th>
-                      <td> {item.accountId} </td>
+                      <td scope="row"> {item.account.name} </td>
+                      <td> {item.account.email} </td>
+                      <td> {item.account.logo} </td>
+                      <td> {item.account.region} </td>
+                      <td> {item.account.language} </td>
                       <td> {item.isVIP ? 'true' : 'false'} </td>
                       <td> {item.engagementRate} </td>
-                      <td> {item.loginChannel} </td>
-                      <td> {item.mainChannel} </td>
-                      <td> {item.promotionType} </td>
-                      <td> {item.niche} </td>
                       <td> {item.contactLink} </td>
-                      <td> 
+                      <td> {item.niche} </td>
+                      <td> {item.promotionType} </td>
+                      <td> {item.telegram && item.telegram.channel ? item.telegram.channel : '-'} </td>
+                      <td> {item.telegram && item.telegram.url ? item.telegram.url : '-'} </td>
+                      <td> {item.telegram && item.twitter.username ? item.twitter.username : '-'} </td>
+                      <td> {item.telegram && item.tiktok.username ? item.tiktok.username : '-'} </td>
+                      <td> {item.telegram && item.instagram.username ? item.instagram.username : '-'} </td>
+                      <td> {item.telegram && item.youtube.username ? item.youtube.username : '-'} </td>
+                      {/* <td> 
                         <Button outline color="primary" size="sm" type="button" onClick={() => router.push(`/admin/account/${item.id}`)}>
                           View Details
                         </Button>
@@ -152,11 +167,14 @@ const InfluencerDashboard = (props) => {
                         <Button outline color="primary" size="sm" type="button" onClick={() => router.push(`/admin/campaigns/${item.id}`)}>
                           View Details
                         </Button>
-                      </td>
-                      <td> {item.priceRange.length > 1 ? `[${item.priceRange[0]}, ${item.priceRange[1]}]` : ''} </td>
+                      </td> */}
+                      {/* <td> {item.priceRange.length > 1 ? `[${item.priceRange[0]}, ${item.priceRange[1]}]` : ''} </td> */}
                       <td> 
                         <Button outline color="primary" size="sm" type="button" onClick={() => updateInflux(item)}>
                           Edit
+                        </Button>
+                        <Button outline color="primary" size="sm" type="button" onClick={() => updateInflux(item)}>
+                          Remove
                         </Button>
                       </td>
                     </tr>
@@ -208,7 +226,7 @@ const InfluencerDashboard = (props) => {
           </Col>
         </Row>
       </Container>
-      <InfluxModal influx={influencer} />
+      <InfluxModal influx={influencer} type={modalType} />
     </>
   );
   // }

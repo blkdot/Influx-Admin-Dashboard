@@ -27,6 +27,8 @@ export async function getInfluencerById(id) {
 // }
 
 export async function getInfluencers() {
+  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`)
+  
   try {
     let influencers = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`, {
       method: 'GET',

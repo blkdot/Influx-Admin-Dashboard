@@ -27,7 +27,6 @@
     "@zeit/next-css": "1.0.1",
     "@zeit/next-sass": "1.0.1",
     "auth": "0.0.9",
-    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",

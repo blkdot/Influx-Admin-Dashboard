@@ -1,14 +1,20 @@
 [
   {
-    "url": "wss://d2t.info/ws/tokens/top-movers?num_results=7"
+    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/influencers"
   },
   {
-    "url": "http://d2t.info/tokens/price-feed"
+    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/brands"
   },
   {
-    "url": "https://d2t.info/tokens/bitcoin/prices?time_range=week"
+    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/campaigns"
   },
   {
-    "url": "https://d2t.info/tokens/bitcoin/volumes/heatmap"
+    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/tags"
+  },
+  {
+    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/payments"
+  },
+  {
+    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/issues"
   }
 ]
