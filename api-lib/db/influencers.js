@@ -27,8 +27,6 @@ export async function getInfluencerById(id) {
 // }
 
 export async function getInfluencers() {
-  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`)
-  
   try {
     let influencers = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`, {
       method: 'GET',
@@ -41,24 +39,40 @@ export async function getInfluencers() {
   }
 }
 
-// export async function insertInfluencer(email, password, role) {
-//   const hashedPassword = await hashPassword(password);
-//   const adminData = {
-//     email,
-//     password: hashedPassword,
-//     role,
-//     createdAt: new Date(),
-//     updatedAt: new Date(),
-//   };
-//   try {
-//     const admin = await prisma.adminUser.create({
-//       data: adminData
-//     })
-//     return admin;
-//   } catch(error) {
-//     console.log(error);
-//     return null;
-//   }
+export async function insertInfluencer(name, email, logo, region, language, isVIP, enagementRate, loginChannel, mainChannel, contactLink, niche,
+  promotionType, telegramUsername, telegramUrl, twitterUsername, twitterUrl, tiktokUsername, tiktokUrl, instagramUsername, instagramUrl, youtubeUsername, youtubeUrl) {
+    try {
+      let influencer = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, email, logo, region, language, isVIP, enagementRate, loginChannel, mainChannel, contactLink, niche,
+          promotionType, telegramUsername, telegramUrl, twitterUsername, twitterUrl, tiktokUsername, tiktokUrl, instagramUsername, instagramUrl, youtubeUsername, youtubeUrl
+        })
+      });
+      return influencer;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+}
+
+// export async function updateInfluencer(name, email, logo, region, language, isVIP, enagementRate, loginChannel, mainChannel, contactLink, niche,
+//   promotionType, telegramUsername, telegramUrl, twitterUsername, twitterUrl, tiktokUsername, tiktokUrl, instagramUsername, instagramUrl, youtubeUsername, youtubeUrl) {
+//     try {
+//       let influencer = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           name, email, logo, region, language, isVIP, enagementRate, loginChannel, mainChannel, contactLink, niche,
+//           promotionType, telegramUsername, telegramUrl, twitterUsername, twitterUrl, tiktokUsername, tiktokUrl, instagramUsername, instagramUrl, youtubeUsername, youtubeUrl
+//         })
+//       });
+//       return influencer;
+//     } catch (error) {
+//       console.log(error);
+//       return null;
+//     }
 // }
 
 // export async function updateAdminById(db, id, { email, password, role, role_create_account, role_delete_account, role_manage_content, role_update_presale_ratings, role_view_user_data }) {
@@ -92,16 +106,14 @@ export async function getInfluencers() {
 //     )
 // }
 
-// export async function deleteAdminById(id) {
-//   try {
-//     const deleteAdmin = await prisma.adminUser.delete({
-//       where: {
-//         id: id,
-//       },
-//     })
-//     return deleteAdmin;
-//   } catch (error) {
-//     console.log(error);
-//     return null;
-//   }
-// }
+export async function deleteInfluencerById(id) {
+  try {
+    let influencer = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/${id}`, {
+      method: 'DELETE',
+    });
+    return influencer;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

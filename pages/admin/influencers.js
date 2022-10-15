@@ -22,7 +22,9 @@ import { useInfluencers } from '../../lib/influencers';
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { setInfluxModalOpen } from "../../store";
+import { fetcher } from "../../lib/fetch";
 import InfluxModal from "../../components/Influx/InfluxModal";
+import DeleteConfirmation from "components/Influx/DeleteConfirmation.js";
 
 const InfluencerDashboard = (props) => {
 
@@ -36,6 +38,11 @@ const InfluencerDashboard = (props) => {
   const [influencer, setInfluencer] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
+
+  const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
+
+  const [influxId, setInfluxId] = useState(-1);
+  const [influxIndex, setInfluxIndex] = useState(-1);
 
   useEffect(() => {
     if (data && data.influencers) {
@@ -70,27 +77,23 @@ const InfluencerDashboard = (props) => {
     dispatch(setInfluxModalOpen(true));
   }
 
-  // const showDeleteConfirmationModal = (id, i) => {
-  //   setAdminId(id);
-  //   setAdminIndex(i);
-  //   setDisplayConfirmationModal(true);
-  // }
+  const removeInflux = (id, i) => {
+    setInfluxId(id);
+    setInfluxIndex(i);
+    setDisplayConfirmationModal(true);
+  }
 
-  // const submitDelete = async (id, i) => {
-  //   setAdmins([...admins.slice(0, i), ...admins.slice(i + 1, admins.length)]);
-  //   setDisplayConfirmationModal(false);
-  //   await fetcher('/api/admins', {
-  //     method: 'DELETE',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({
-  //       id: id
-  //     }),
-  //   });
-  // }
+  const submitDelete = async (id, i) => {
+    setInfluencers([...influencers.slice(0, i), ...influencers.slice(i + 1, influencers.length)]);
+    setDisplayConfirmationModal(false);
+    await fetcher(`/api/influencers/${id}`, {
+      method: 'DELETE'
+    });
+  }
 
-  // const hideConfirmationModal = () => {
-  //   setDisplayConfirmationModal(false);
-  // }
+  const hideConfirmationModal = () => {
+    setDisplayConfirmationModal(false);
+  }
 
   return (
     <>
@@ -173,7 +176,7 @@ const InfluencerDashboard = (props) => {
                         <Button outline color="primary" size="sm" type="button" onClick={() => updateInflux(item)}>
                           Edit
                         </Button>
-                        <Button outline color="primary" size="sm" type="button" onClick={() => updateInflux(item)}>
+                        <Button outline color="primary" size="sm" type="button" onClick={() => removeInflux(item.id, i)}>
                           Remove
                         </Button>
                       </td>
@@ -227,6 +230,7 @@ const InfluencerDashboard = (props) => {
         </Row>
       </Container>
       <InfluxModal influx={influencer} type={modalType} />
+      <DeleteConfirmation showModal={displayConfirmationModal} confirmModal={submitDelete} hideModal={hideConfirmationModal} id={influxId} index={influxIndex}  />
     </>
   );
   // }

@@ -1,20 +1,20 @@
 [
   {
-    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/influencers"
+    "url": "https://9vey560uj0.execute-api.us-east-1.amazonaws.com/default/api/influencers"
   },
   {
-    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/brands"
+    "url": "https://9vey560uj0.execute-api.us-east-1.amazonaws.com/default/api/brands"
   },
   {
-    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/campaigns"
+    "url": "https://9vey560uj0.execute-api.us-east-1.amazonaws.com/default/api/campaigns"
   },
   {
-    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/tags"
+    "url": "https://9vey560uj0.execute-api.us-east-1.amazonaws.com/default/api/tags"
   },
   {
-    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/payments"
+    "url": "https://9vey560uj0.execute-api.us-east-1.amazonaws.com/default/api/payments"
   },
   {
-    "url": "https://u9u5efax0g.execute-api.us-east-1.amazonaws.com/default/api/issues"
+    "url": "https://9vey560uj0.execute-api.us-east-1.amazonaws.com/default/api/issues"
   }
 ]

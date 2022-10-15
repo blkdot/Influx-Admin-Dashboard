@@ -1,5 +1,5 @@
 import { ValidateProps } from '../../../api-lib/constants';
-import { getInfluencers } from '../../../api-lib/db';
+import { getInfluencers, insertInfluencer } from '../../../api-lib/db';
 import { validateBody } from '../../../api-lib/middlewares';
 import { ncOpts } from '../../../api-lib/nc';
 import nc from 'next-connect';
@@ -11,49 +11,15 @@ handler.get(async (req, res) => {
   return res.json({ influencers });
 });
 
-// handler.post(
-//   validateBody({
-//     type: 'object',
-//     properties: {
-//       email: ValidateProps.admin.email,
-//       password: ValidateProps.admin.password,
-//       role: ValidateProps.admin.role,
-//     },
-//     required: ['email'],
-//     additionalProperties: true,
-//   }),
-//   async (req, res) => {
-//     const { email, password, role } = req.body
-//     const admin = await insertAdmin(email, password, role);
-//     return res.json({ admin });
-//   }
-// );
-
-// handler.patch(
-//   // validateBody({
-//   //   type: 'object',
-//   //   properties: {
-//   //     email: ValidateProps.admin.email,
-//   //   },
-//   //   required: ['email'],
-//   //   additionalProperties: true,
-//   // }),
-//   async (req, res) => {
-//     const { email, loggedIn } = req.body;
-//     const admin = await updateAdminByEmail(req.db, email, { loggedIn });
-
-//     res.json({ admin });
-//   }
-// );
-
-handler.delete(
+handler.post(
   async (req, res) => {
-
-    const { id  } = req.body;
-   
-    const admin = await deleteAdminById(id);
-
-    res.json({ admin });
+    const { 
+      name, email, logo, region, language, isVIP, enagementRate, loginChannel, mainChannel, contactLink, niche,
+      promotionType, telegramUsername, telegramUrl, twitterUsername, twitterUrl, tiktokUsername, tiktokUrl, instagramUsername, instagramUrl, youtubeUsername, youtubeUrl
+    } = req.body
+    const influencer = await insertInfluencer(name, email, logo, region, language, isVIP, enagementRate, loginChannel, mainChannel, contactLink, niche,
+      promotionType, telegramUsername, telegramUrl, twitterUsername, twitterUrl, tiktokUsername, tiktokUrl, instagramUsername, instagramUrl, youtubeUsername, youtubeUrl);
+    return res.json({ influencer });
   }
 );
 

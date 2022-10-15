@@ -41,16 +41,16 @@ const AdminDashboard = (props) => {
   const [adminId, setAdminId] = useState(-1);
   const [adminIndex, setAdminIndex] = useState(-1);
 
-  useEffect(() => {
-    setInterval(async () => {
-      let data = await fetcher('/api/admins', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      console.log('data admins==', data.admins);
-      setAdmins(data.admins);
-    }, [15000]);
-  }, [])
+  // useEffect(() => {
+  //   setInterval(async () => {
+  //     let data = await fetcher('/api/admins', {
+  //       method: 'GET',
+  //       headers: { 'Content-Type': 'application/json' }
+  //     });
+  //     console.log('data admins==', data.admins);
+  //     setAdmins(data.admins);
+  //   }, [15000]);
+  // }, [])
 
   useEffect(() => {
     if (data) {

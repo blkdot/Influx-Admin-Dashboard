@@ -1,19 +1,52 @@
-import { ValidateProps } from '../../../../api-lib/constants';
-import { getInfluencerById } from '../../../../api-lib/db';
-import { validateBody } from '../../../../api-lib/middlewares';
 import { ncOpts } from '../../../../api-lib/nc';
 import nc from 'next-connect';
+import { fetcher } from "../../../../lib/fetch";
 
 const handler = nc(ncOpts);
 
 handler.get(async (req, res) => {
-  const influencer = await getInfluencerById(parseInt(req.query.id));
-  if (!influencer) {
+  try {
+    let influencer = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/${req.query.id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    return res.json({ influencer });
+  } catch (error) {
+    console.log(error);
     return res.status(404).json({ error: { message: 'influencer is not found GET.' } });
   }
-
-  return res.json({ influencer });
 });
+
+handler.delete(
+  async (req, res) => {
+    try {
+      let influencer = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/${req.query.id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      return res.json({ influencer });
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({ error: { message: 'influencer is not found DELETE.' } });
+    }
+  }
+);
+
+handler.patch(
+  async (req, res) => {
+    try {
+      let influencer = await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/${req.query.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: req.body
+      });
+      return res.json({ influencer });
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({ error: { message: 'influencer is not found PATCH.' } });
+    }
+  }
+);
 
 // handler.post(
 //   validateBody({

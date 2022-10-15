@@ -16,49 +16,83 @@ import {
 } from "reactstrap";
 import { setInfluxModalOpen } from "../../store";
 import { fetcher } from "../../lib/fetch";
+import Select from 'react-select';
 
 function InfluxModal({influx, type}) {
-  console.log('type=====', type);
+
+  const isVIPOptions = [{value: true, label: 'true'}, {value: false, label: 'false'}];
+  const engagementRateOptions = [
+    {value: 'Poor', label: 'Poor'},
+    {value: 'Ok', label: 'Ok'},
+    {value: 'Good', label: 'Good'},
+    {value: 'Great', label: 'Great'}
+  ];
+  const promotionTypeOptions = [
+    {value: 'PaidPromo', label: 'PaidPromo'},
+    {value: 'MayDoPaidPromo', label: 'MayDoPaidPromo'}
+  ];
+  const channelOptions = [
+    {value: 'Telegram', label: 'Telegram'},
+    {value: 'Twitter', label: 'Twitter'},
+    {value: 'Tiktok', label: 'Tiktok'},
+    {value: 'Instagram', label: 'Instagram'},
+    {value: 'Youtube', label: 'Youtube'}
+  ];
+
+  const { mutate } = useSWRConfig();
 
   const dispatch = useDispatch();
 	const state = useSelector((state) => state.influx);
-  const [accountId, setAccountId] = useState('');
+
+  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [logo, setLogo] = useState('');
   const [region, setRegion] = useState('');
   const [language, setLanguage] = useState('');
   const [isVIP, setIsVIP] = useState(false);
-  const [engagementRate, setEngagementRate] = useState('');
+  const [engagementRate, setEngagementRate] = useState('Ok');
+  const [loginChannel, setLoginChannel] = useState('Telegram');
+  const [mainChannel, setMainChannel] = useState('Telegram');
   const [contactLink, setContactLink] = useState('');
   const [niche, setNiche] = useState('');
-  const [promotionType, setPromotionType] = useState('');
-  const [telegramChannel, setTelegramChannel] = useState('');
+  const [promotionType, setPromotionType] = useState('PaidPromo');
+  const [telegramUsername, setTelegramUsername] = useState('');
   const [telegramUrl, setTelegramUrl] = useState('');
   const [twitterUsername, setTwitterUsername] = useState('');
+  const [twitterUrl, setTwitterUrl] = useState('');
   const [tiktokUsername, setTiktokUsername] = useState('');
+  const [tiktokUrl, setTiktokUrl] = useState('');
   const [instagramUsername, setInstagramUsername] = useState('');
+  const [instagramUrl, setInstagramUrl] = useState('');
   const [youtubeUsername, setYoutubeUsername] = useState('');
+  const [youtubeUrl, setYoutubeUrl] = useState('');
 
   useEffect(() => {
     if (influx && type === 'edit') {
-      setAccountId(influx.accountId);
+      setId(influx.id);
       setName(influx.account.name);
       setEmail(influx.account.email);
       setLogo(influx.account.logo);
       setRegion(influx.account.region);
       setLanguage(influx.account.language);
-      setIsVIP(influx.isVIP === 'true' ? true : false);
+      setIsVIP(influx.isVIP);
       setEngagementRate(influx.engagementRate);
+      setLoginChannel(influx.loginChannel);
+      setMainChannel(influx.mainChannel);
       setContactLink(influx.contactLink);
       setNiche(influx.niche);
       setPromotionType(influx.promotionType);
-      setTelegramChannel(influx.telegram && influx.telegram.channel ? influx.telegram.channel : '')
+      setTelegramUsername(influx.telegram && influx.telegram.channel ? influx.telegram.channel : '')
       setTelegramUrl(influx.telegram && influx.telegram.url ? influx.telegram.url : '')
       setTwitterUsername(influx.twitter && influx.twitter.username ? influx.twitter.username : '')
+      setTwitterUrl(influx.twitter && influx.twitter.url ? influx.twitter.url : '')
       setTiktokUsername(influx.tiktok && influx.tiktok.username ? influx.tiktok.username : '')
+      setTiktokUrl(influx.tiktok && influx.tiktok.url ? influx.tiktok.url : '')
       setInstagramUsername(influx.instagram && influx.instagram.username ? influx.instagram.username : '')
+      setInstagramUrl(influx.instagram && influx.instagram.url ? influx.instagram.url : '')
       setYoutubeUsername(influx.youtube && influx.youtube.username ? influx.youtube.username : '')
+      setYoutubeUrl(influx.youtube && influx.youtube.url ? influx.youtube.url : '')
     } else {
       setName('');
       setEmail('');
@@ -66,16 +100,22 @@ function InfluxModal({influx, type}) {
       setRegion('');
       setLanguage('');
       setIsVIP(false);
-      setEngagementRate('');
+      setEngagementRate('Ok');
+      setLoginChannel('Telegram');
+      setMainChannel('Telegram');
       setContactLink('');
       setNiche('');
-      setPromotionType('');
-      setTelegramChannel('')
+      setPromotionType('PaidPromo');
+      setTelegramUsername('')
       setTelegramUrl('')
       setTwitterUsername('')
+      setTwitterUrl('')
       setTiktokUsername('')
+      setTiktokUrl('')
       setInstagramUsername('')
+      setInstagramUrl('')
       setYoutubeUsername('')
+      setYoutubeUrl('')
     }
   }, [influx, type]);
 
@@ -83,21 +123,32 @@ function InfluxModal({influx, type}) {
     try {
       e.preventDefault();
       if (type === 'edit' && name != '' && email != '' && logo != '') {
-        await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers`, {
-          method: 'POST',
+        await fetcher(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/influencers/${id}`, {
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            accountId,
             name,
             email,
             logo,
             region,
             language,
-            isVIP: isVIP === "true" ? true : false,
+            isVIP,
             engagementRate,
+            loginChannel,
+            mainChannel,
             contactLink,
             niche,
             promotionType,
+            telegramUsername,
+            telegramUrl,
+            twitterUsername,
+            twitterUrl,
+            tiktokUsername,
+            tiktokUrl,
+            instagramUsername,
+            instagramUrl,
+            youtubeUsername,
+            youtubeUrl
           }),
         });
       } else if (type === 'add' && name != '' && email != '' && logo != '') {
@@ -110,15 +161,27 @@ function InfluxModal({influx, type}) {
             logo,
             region,
             language,
-            isVIP: isVIP === "true" ? true : false,
+            isVIP,
             engagementRate,
+            loginChannel,
+            mainChannel,
             contactLink,
             niche,
             promotionType,
+            telegramUsername,
+            telegramUrl,
+            twitterUsername,
+            twitterUrl,
+            tiktokUsername,
+            tiktokUrl,
+            instagramUsername,
+            instagramUrl,
+            youtubeUsername,
+            youtubeUrl
           }),
         });
       }
-      
+      mutate('/api/influencers');
     } catch (e) {
       console.log(e.message);
     } finally {
@@ -245,13 +308,10 @@ function InfluxModal({influx, type}) {
                     >
                       isVIP
                     </label>
-                    <Input
-                      className="form-control-alternative"
-                      id="input-isVIP"
-                      placeholder=""
-                      type="text"
-                      value={isVIP}
-                      onChange={(e) => setIsVIP(e.target.value)}
+                    <Select
+                      defaultValue={isVIP}
+                      onChange={(item) => setIsVIP(item.value)}
+                      options={isVIPOptions}
                     />
                   </FormGroup>
                 </Col>
@@ -263,13 +323,40 @@ function InfluxModal({influx, type}) {
                     >
                       engagementRate
                     </label>
-                    <Input
-                      className="form-control-alternative"
-                      id="input-engagementRate"
-                      placeholder=""
-                      type="text"
-                      value={engagementRate}
-                      onChange={(e) => setEngagementRate(e.target.value)}
+                    <Select
+                      defaultValue={engagementRate}
+                      onChange={(item) => setEngagementRate(item.value)}
+                      options={engagementRateOptions}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6">
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                      htmlFor="input-loginChannel"
+                    >
+                      Login Channel
+                    </label>
+                    <Select
+                      defaultValue={loginChannel}
+                      onChange={(item) => setLoginChannel(item.value)}
+                      options={channelOptions}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6">
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                      htmlFor="input-mainChannel"
+                    >
+                      Main Channel
+                    </label>
+                    <Select
+                      defaultValue={mainChannel}
+                      onChange={(item) => setMainChannel(item.value)}
+                      options={channelOptions}
                     />
                   </FormGroup>
                 </Col>
@@ -317,13 +404,10 @@ function InfluxModal({influx, type}) {
                     >
                       promotionType
                     </label>
-                    <Input
-                      className="form-control-alternative"
-                      id="input-promotionType"
-                      placeholder=""
-                      type="text"
-                      value={promotionType}
-                      onChange={(e) => setPromotionType(e.target.value)}
+                    <Select
+                      defaultValue={promotionType}
+                      onChange={(item) => setPromotionType(item.value)}
+                      options={promotionTypeOptions}
                     />
                   </FormGroup>
                 </Col>
@@ -332,14 +416,14 @@ function InfluxModal({influx, type}) {
                     <label
                       className="form-control-label"
                     >
-                      Telegram Channel Name
+                      Telegram Username
                     </label>
                     <Input
                       className="form-control-alternative"
                       placeholder=""
                       type="text"
-                      value={telegramChannel}
-                      onChange={(e) => setTelegramChannel(e.target.value)}
+                      value={telegramUsername}
+                      onChange={(e) => setTelegramUsername(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -380,14 +464,14 @@ function InfluxModal({influx, type}) {
                     <label
                       className="form-control-label"
                     >
-                      Twitter Username
+                      Twitter Url
                     </label>
                     <Input
                       className="form-control-alternative"
                       placeholder=""
                       type="text"
-                      value={twitterUsername}
-                      onChange={(e) => setTwitterUsername(e.target.value)}
+                      value={twitterUrl}
+                      onChange={(e) => setTwitterUrl(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
@@ -412,6 +496,22 @@ function InfluxModal({influx, type}) {
                     <label
                       className="form-control-label"
                     >
+                      Tiktok Url
+                    </label>
+                    <Input
+                      className="form-control-alternative"
+                      placeholder=""
+                      type="text"
+                      value={tiktokUrl}
+                      onChange={(e) => setTiktokUrl(e.target.value)}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6">
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                    >
                       Instagram Username
                     </label>
                     <Input
@@ -428,6 +528,22 @@ function InfluxModal({influx, type}) {
                     <label
                       className="form-control-label"
                     >
+                      Instagram Url
+                    </label>
+                    <Input
+                      className="form-control-alternative"
+                      placeholder=""
+                      type="text"
+                      value={instagramUrl}
+                      onChange={(e) => setInstagramUrl(e.target.value)}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6">
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                    >
                       Youtube Username
                     </label>
                     <Input
@@ -436,6 +552,22 @@ function InfluxModal({influx, type}) {
                       type="text"
                       value={youtubeUsername}
                       onChange={(e) => setYoutubeUsername(e.target.value)}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="6">
+                  <FormGroup>
+                    <label
+                      className="form-control-label"
+                    >
+                      Youtube Url
+                    </label>
+                    <Input
+                      className="form-control-alternative"
+                      placeholder=""
+                      type="text"
+                      value={youtubeUrl}
+                      onChange={(e) => setYoutubeUrl(e.target.value)}
                     />
                   </FormGroup>
                 </Col>
